@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kelola Produk - AromaPedia</title>
+    <link rel="stylesheet" href="../styles.css"> <!-- Pastikan path CSS utama benar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+    <div class="admin-layout-wrapper">
+        <!-- ADMIN SIDEBAR -->
+        <aside class="admin-sidebar">
+            <a href="admin-dashboard.html" class="admin-logo">AromaPedia Admin</a>
+            <ul class="admin-nav-list">
+                <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="admin-articles.html"><i class="fas fa-newspaper"></i> Kelola Artikel</a></li>
+                <li><a href="admin-products.html" class="active"><i class="fas fa-box-open"></i> Kelola Produk</a></li>
+                <li><a href="admin-users.html"><i class="fas fa-users-cog"></i> Kelola Pengguna</a></li>
+                <li><a href="admin-transactions.html"><i class="fas fa-receipt"></i> Kelola Transaksi</a></li>
+                <li><a href="index.html" target="_blank"><i class="fas fa-globe"></i> Lihat Website</a></li>
+                <li><a href="#" id="adminLogoutBtn"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+            </ul>
+        </aside>
+
+        <!-- ADMIN MAIN CONTENT -->
+        <main class="admin-main-content">
+            <header class="admin-content-header">
+                <button id="adminMenuToggle" class="admin-menu-toggle-btn"><i class="fas fa-bars"></i></button>
+                <h1>Kelola Produk</h1>
+                <a href="admin-product-form.html" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Produk Baru</a>
+            </header>
+
+            <section class="admin-content-area">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3>Daftar Produk</h3>
+                        <div class="admin-table-filters">
+                            <input type="search" placeholder="Cari nama produk atau SKU..." id="adminSearchProducts">
+                            <select id="adminFilterProductCategory">
+                                <option value="">Semua Kategori</option>
+                                <option value="grinder">Grinder</option>
+                                <option value="mesin-espresso">Mesin Espresso</option>
+                                <option value="manual-brew">Manual Brew</option>
+                                <option value="biji-kopi">Biji Kopi</option>
+                                <option value="aksesoris">Aksesoris</option>
+                            </select>
+                            <select id="adminFilterProductStatus">
+                                <option value="">Semua Status</option>
+                                <option value="active">Aktif</option>
+                                <option value="inactive">Nonaktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="admin-table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAllProducts" aria-label="Pilih semua produk"></th>
+                                        <th>Gambar</th>
+                                        <th>Nama Produk</th>
+                                        <th>SKU</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                        <th>Kategori</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductTableBody">
+                                    <!-- Contoh Row Produk 1 -->
+                                    <tr data-product-id="P001" data-category="manual-brew" data-status="active">
+                                        <td><input type="checkbox" class="select-product-item" value="P001"></td>
+                                        <td><img src="https://placehold.co/60x60/D2B48C/333333?text=V60" alt="Hario V60" class="product-thumbnail-admin"></td>
+                                        <td><strong>Hario V60 Ceramic Dripper</strong></td>
+                                        <td>HAR-V60-CER-02</td>
+                                        <td>Rp 350.000</td>
+                                        <td><span class="stock-level stock-good">15</span></td>
+                                        <td>Manual Brew</td>
+                                        <td><span class="status-badge status-active">Aktif</span></td>
+                                        <td class="action-btns">
+                                            <a href="admin-product-form.html?id=P001" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <button class="btn-action btn-delete" title="Hapus" data-id="P001" data-name="Hario V60 Dripper"><i class="fas fa-trash-alt"></i></button>
+                                            <a href="product-detail.html?id=P001" target="_blank" class="btn-action btn-view" title="Lihat"><i class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    <!-- Contoh Row Produk 2 (Stok Menipis) -->
+                                    <tr data-product-id="P002" data-category="biji-kopi" data-status="active">
+                                        <td><input type="checkbox" class="select-product-item" value="P002"></td>
+                                        <td><img src="https://placehold.co/60x60/8B4513/FFFFFF?text=Gayo" alt="Biji Kopi Gayo" class="product-thumbnail-admin"></td>
+                                        <td><strong>Biji Kopi Gayo Wine Process</strong></td>
+                                        <td>AROMAPD-GAYO-200</td>
+                                        <td>Rp 102.000 <small class="original-price-admin">Rp 120.000</small></td>
+                                        <td><span class="stock-level stock-low">3</span></td>
+                                        <td>Biji Kopi</td>
+                                        <td><span class="status-badge status-active">Aktif</span></td>
+                                        <td class="action-btns">
+                                            <a href="admin-product-form.html?id=P002" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <button class="btn-action btn-delete" title="Hapus" data-id="P002" data-name="Biji Kopi Gayo"><i class="fas fa-trash-alt"></i></button>
+                                            <a href="product-detail.html?id=P002" target="_blank" class="btn-action btn-view" title="Lihat"><i class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                     <!-- Contoh Row Produk 3 (Nonaktif) -->
+                                    <tr data-product-id="P003" data-category="grinder" data-status="inactive">
+                                        <td><input type="checkbox" class="select-product-item" value="P003"></td>
+                                        <td><img src="https://placehold.co/60x60/A9A9A9/333333?text=Timemore" alt="Timemore Grinder" class="product-thumbnail-admin"></td>
+                                        <td><strong>Timemore Chestnut C2 Grinder</strong></td>
+                                        <td>TIME-C2-BLK</td>
+                                        <td>Rp 750.000</td>
+                                        <td><span class="stock-level stock-out">0</span></td>
+                                        <td>Grinder</td>
+                                        <td><span class="status-badge status-inactive">Nonaktif</span></td>
+                                        <td class="action-btns">
+                                            <a href="admin-product-form.html?id=P003" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <button class="btn-action btn-delete" title="Hapus" data-id="P003" data-name="Timemore C2 Grinder"><i class="fas fa-trash-alt"></i></button>
+                                            <a href="#" class="btn-action btn-view disabled" title="Lihat (Nonaktif)"><i class="fas fa-eye-slash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <!-- Tambah row produk lain -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="admin-table-bulk-actions" style="margin-top: 20px; display: none;">
+                            <select id="bulkActionSelect">
+                                <option value="">Aksi Massal...</option>
+                                <option value="activate">Aktifkan</option>
+                                <option value="deactivate">Nonaktifkan</option>
+                                <option value="delete">Hapus</option>
+                            </select>
+                            <button id="applyBulkActionBtn" class="btn btn-secondary btn-sm">Terapkan</button>
+                        </div>
+                        <nav class="pagination admin-pagination">
+                            <!-- Salin dari halaman admin lain -->
+                        </nav>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

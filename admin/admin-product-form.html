@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Form Produk - AromaPedia</title> <!-- Judul dinamis -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Jika pakai library WYSIWYG (misal, Quill JS atau TinyMCE), link CSS-nya -->
+    <!-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> -->
+</head>
+<body class="admin-page">
+    <div class="admin-layout-wrapper">
+        <!-- ADMIN SIDEBAR (Sama seperti admin-products.html) -->
+        <aside class="admin-sidebar">
+             <a href="admin-dashboard.html" class="admin-logo">AromaPedia Admin</a>
+            <ul class="admin-nav-list">
+                <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="admin-articles.html"><i class="fas fa-newspaper"></i> Kelola Artikel</a></li>
+                <li><a href="admin-products.html" class="active"><i class="fas fa-box-open"></i> Kelola Produk</a></li>
+                <li><a href="admin-users.html"><i class="fas fa-users-cog"></i> Kelola Pengguna</a></li>
+                <li><a href="admin-transactions.html"><i class="fas fa-receipt"></i> Kelola Transaksi</a></li>
+                <li><a href="index.html" target="_blank"><i class="fas fa-globe"></i> Lihat Website</a></li>
+                <li><a href="#" id="adminLogoutBtn"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+            </ul>
+        </aside>
+
+        <!-- ADMIN MAIN CONTENT -->
+        <main class="admin-main-content">
+            <header class="admin-content-header">
+                 <button id="adminMenuToggle" class="admin-menu-toggle-btn"><i class="fas fa-bars"></i></button>
+                <h1 id="productFormTitle">Tambah Produk Baru</h1> <!-- Dinamis: "Edit Produk" -->
+                <a href="admin-products.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Kembali ke Daftar</a>
+            </header>
+
+            <section class="admin-content-area">
+                <form id="productAdminForm" class="admin-form">
+                    <div class="admin-form-layout">
+                        <!-- Kolom Konten Utama Produk -->
+                        <div class="admin-form-main">
+                            <div class="admin-card">
+                                <div class="admin-card-header"><h3>Informasi Dasar Produk</h3></div>
+                                <div class="admin-card-body">
+                                    <div class="form-group">
+                                        <label for="product-name">Nama Produk *</label>
+                                        <input type="text" id="product-name" name="product_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-sku">SKU (Stock Keeping Unit) *</label>
+                                        <input type="text" id="product-sku" name="sku" required placeholder="Contoh: HAR-V60-CER-02">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-description">Deskripsi Produk</label>
+                                        <!-- Untuk WYSIWYG, ganti textarea dengan div atau biarkan textarea dan init dengan JS -->
+                                        <textarea id="product-description" name="description" rows="10" placeholder="Deskripsi lengkap produk..."></textarea>
+                                        <!-- <div id="quill-editor-description" style="min-height: 200px;"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="admin-card">
+                                <div class="admin-card-header"><h3>Harga & Stok</h3></div>
+                                <div class="admin-card-body">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="product-price">Harga Normal (Rp) *</label>
+                                            <input type="number" id="product-price" name="price" step="1000" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="product-sale-price">Harga Diskon (Rp)</label>
+                                            <input type="number" id="product-sale-price" name="sale_price" step="1000" min="0">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-stock">Jumlah Stok *</label>
+                                        <input type="number" id="product-stock" name="stock" min="0" required>
+                                    </div>
+                                    <div class="form-group form-checkbox">
+                                        <input type="checkbox" id="manage-stock" name="manage_stock" checked>
+                                        <label for="manage-stock">Kelola Stok?</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="admin-card">
+                                <div class="admin-card-header"><h3>Gambar Produk</h3></div>
+                                <div class="admin-card-body">
+                                    <div class="form-group">
+                                        <label for="product-main-image">Gambar Utama Produk</label>
+                                        <input type="file" id="product-main-image" name="main_image" accept="image/*">
+                                        <div id="main-image-preview" class="image-preview-box">
+                                            <span class="image-preview-text">Pratinjau Gambar Utama</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-gallery-images">Galeri Gambar Tambahan (Max 5)</label>
+                                        <input type="file" id="product-gallery-images" name="gallery_images[]" accept="image/*" multiple>
+                                        <div id="gallery-images-preview-container" class="gallery-preview-container">
+                                            <!-- Pratinjau galeri akan muncul di sini -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="admin-card">
+                                <div class="admin-card-header"><h3>Spesifikasi (Opsional)</h3></div>
+                                <div class="admin-card-body" id="product-specifications-container">
+                                    <!-- Placeholder, JS akan menangani penambahan field spesifikasi -->
+                                    <div class="specification-item form-row">
+                                        <div class="form-group">
+                                            <input type="text" name="spec_name[]" placeholder="Nama Spesifikasi (cth: Material)">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="spec_value[]" placeholder="Nilai Spesifikasi (cth: Keramik)">
+                                        </div>
+                                        <button type="button" class="btn-remove-spec" style="align-self: flex-end; margin-bottom: 20px;">×</button>
+                                    </div>
+                                </div>
+                                <div class="admin-card-footer" style="text-align: right;">
+                                    <button type="button" id="addSpecificationBtn" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-plus"></i> Tambah Spesifikasi
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Manajemen Varian (UI Sederhana, idealnya lebih kompleks) -->
+                             <div class="admin-card">
+                                <div class="admin-card-header"><h3>Varian Produk (Opsional)</h3></div>
+                                <div class="admin-card-body">
+                                    <p style="font-size:0.9rem; color:var(--medium-text); margin-bottom:15px;">Jika produk memiliki varian (misal: warna, ukuran gilingan), tambahkan di sini. Setiap varian dapat memiliki SKU, harga, dan stok sendiri.</p>
+                                    <div id="product-variants-container">
+                                        <!-- Placeholder untuk field varian -->
+                                    </div>
+                                     <button type="button" id="addVariantBtn" class="btn btn-outline-secondary btn-sm" style="margin-top:10px;">
+                                        <i class="fas fa-plus"></i> Tambah Varian
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="admin-card">
+                                 <div class="admin-card-header"><h3>Optimasi SEO (Opsional)</h3></div>
+                                 <div class="admin-card-body">
+                                     <!-- Sama seperti form artikel -->
+                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Kolom Sidebar Form Produk -->
+                        <div class="admin-form-sidebar">
+                            <div class="admin-card">
+                                <div class="admin-card-header"><h3>Status & Visibilitas</h3></div>
+                                <div class="admin-card-body">
+                                    <div class="form-group">
+                                        <label for="product-status">Status Produk</label>
+                                        <select id="product-status" name="status">
+                                            <option value="active">Aktif (Tampil di Toko)</option>
+                                            <option value="inactive">Nonaktif (Disembunyikan)</option>
+                                            <option value="draft">Draf</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" name="save_product" class="btn btn-primary">Simpan Produk</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="admin-card">
+                                <div class="admin-card-header"><h3>Organisasi Produk</h3></div>
+                                <div class="admin-card-body">
+                                    <div class="form-group">
+                                        <label for="product-category">Kategori Produk *</label>
+                                        <select id="product-category" name="category" required>
+                                            <option value="">Pilih Kategori</option>
+                                            <option value="grinder">Grinder</option>
+                                            <option value="mesin-espresso">Mesin Espresso</option>
+                                            <option value="manual-brew">Manual Brew</option>
+                                            <option value="biji-kopi">Biji Kopi</option>
+                                            <option value="aksesoris">Aksesoris</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-brand">Merek (Opsional)</label>
+                                        <input type="text" id="product-brand" name="brand" placeholder="Contoh: Hario, Timemore">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-tags">Tag Produk (pisahkan dengan koma)</label>
+                                        <input type="text" id="product-tags" name="tags" placeholder="v60, keramik, manual">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script src="../script.js"></script>
+    <!-- Jika pakai library WYSIWYG, init script-nya di sini -->
+    <!-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        if (document.getElementById('quill-editor-description')) {
+            var quill = new Quill('#quill-editor-description', {
+                theme: 'snow',
+                modules: { toolbar: [ ['bold', 'italic', 'underline'], ['link'], [{ 'list': 'ordered'}, { 'list': 'bullet' }] ] }
+            });
+            // Sinkronisasi dengan textarea tersembunyi jika perlu
+            // quill.on('text-change', function() {
+            //    document.getElementById('product-description').value = quill.root.innerHTML;
+            // });
+        }
+    </script> -->
+</body>
+</html>

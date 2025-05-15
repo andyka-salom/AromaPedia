@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pesanan - Akun Saya - AromaPedia</title>
+    <link rel="stylesheet" href="../styles.css">
+    <!-- <link rel="stylesheet" href="account-styles.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="main-header">
+        <nav class="container">
+            <a href="#" class="logo animate-on-scroll fade-in-down">AromaPedia</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#featured-products">Produk</a></li>
+                <li><a href="#featured-articles">Blog</a></li>
+                <li><a href="catalog.html">Toko</a></li>
+                <li><a href="cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-header-section bg-light">
+            <div class="container">
+                <h1>Akun Saya</h1>
+            </div>
+        </section>
+
+        <!-- ACCOUNT CONTENT -->
+        <section class="account-section section-padding">
+            <div class="container">
+                <div class="account-layout-wrapper">
+                    <!-- ACCOUNT SIDEBAR NAVIGATION -->
+                    <aside class="account-sidebar animate-on-scroll fade-in-left">
+                        <div class="user-profile-summary">
+                            <img src="https://placehold.co/80x80/7F8C8D/FFFFFF?text=JD" alt="User Avatar" class="user-avatar">
+                            <h3 class="user-name">John Doe</h3>
+                            <p class="user-email">john.doe@example.com</p>
+                        </div>
+                        <ul class="account-nav-list">
+                            <li><a href="account-profile.html"><i class="fas fa-user-edit"></i> Profil Saya</a></li>
+                            <li><a href="account-history.html" class="active"><i class="fas fa-history"></i> Riwayat Pesanan</a></li>
+                            <li><a href="account-address.html"><i class="fas fa-map-marker-alt"></i> Alamat Tersimpan</a></li>
+                            <li><a href="account-wishlist.html"><i class="fas fa-heart"></i> Wishlist</a></li>
+                            <li><a href="#" class="logout-link"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- MAIN ACCOUNT CONTENT (Order History) -->
+                    <div class="account-main-content animate-on-scroll fade-in-up">
+                        <h2>Riwayat Pesanan Anda</h2>
+
+                        <div class="order-history-filters">
+                            <div class="form-group">
+                                <label for="filter-status">Filter Status:</label>
+                                <select id="filter-status" name="status">
+                                    <option value="all">Semua Status</option>
+                                    <option value="pending">Menunggu Pembayaran</option>
+                                    <option value="processing">Diproses</option>
+                                    <option value="shipped">Dikirim</option>
+                                    <option value="completed">Selesai</option>
+                                    <option value="cancelled">Dibatalkan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="filter-date">Filter Tanggal:</label>
+                                <input type="month" id="filter-date" name="date_month">
+                            </div>
+                            <button class="btn btn-outline-primary">Terapkan Filter</button>
+                        </div>
+
+                        <div class="order-history-list">
+                            <!-- Contoh Kartu Pesanan 1 -->
+                            <article class="order-card">
+                                <div class="order-card-header">
+                                    <div class="order-id-date">
+                                        <span>No. Pesanan: <strong>#AP20230810001</strong></span>
+                                        <span>Tanggal: <strong>10 Agustus 2023</strong></span>
+                                    </div>
+                                    <span class="order-status status-completed">Selesai</span>
+                                </div>
+                                <div class="order-card-body">
+                                    <div class="order-item-preview">
+                                        <img src="https://placehold.co/60x60/D2B48C/333333?text=V60" alt="Produk 1">
+                                        <img src="https://placehold.co/60x60/8B4513/FFFFFF?text=Gayo" alt="Produk 2">
+                                        <span>+1 item lainnya</span>
+                                    </div>
+                                    <div class="order-total">
+                                        <span>Total Pembayaran</span>
+                                        <strong>Rp 569.000</strong>
+                                    </div>
+                                </div>
+                                <div class="order-card-footer">
+                                    <a href="order-detail.html?id=AP20230810001" class="btn btn-primary btn-sm">Lihat Detail Pesanan</a>
+                                </div>
+                            </article>
+
+                            <!-- Contoh Kartu Pesanan 2 -->
+                             <article class="order-card">
+                                <div class="order-card-header">
+                                    <div class="order-id-date">
+                                        <span>No. Pesanan: <strong>#AP20230725005</strong></span>
+                                        <span>Tanggal: <strong>25 Juli 2023</strong></span>
+                                    </div>
+                                    <span class="order-status status-shipped">Dikirim</span>
+                                </div>
+                                <div class="order-card-body">
+                                    <div class="order-item-preview">
+                                        <img src="https://placehold.co/60x60/A9A9A9/333333?text=Grinder" alt="Produk 1">
+                                        <span>Timemore Chestnut C2 Grinder</span>
+                                    </div>
+                                    <div class="order-total">
+                                        <span>Total Pembayaran</span>
+                                        <strong>Rp 765.000</strong> <!-- Termasuk ongkir -->
+                                    </div>
+                                </div>
+                                <div class="order-card-footer">
+                                     <button class="btn btn-outline-secondary btn-sm track-shipment-btn" data-resi="JNLEXP0123456789">Lacak Pengiriman</button>
+                                    <a href="order-detail.html?id=AP20230725005" class="btn btn-primary btn-sm">Lihat Detail Pesanan</a>
+                                </div>
+                            </article>
+                            <!-- Tambahkan lebih banyak kartu pesanan -->
+                        </div>
+                        <nav class="pagination">
+                            <!-- Salin dari blog.html -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column footer-about">
+                    <h3 class="logo-footer">AromaPedia</h3>
+                    <p>Menemani setiap seduhan kopi Anda dengan produk berkualitas dan pengetahuan yang mencerahkan.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigasi Cepat</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Cara Pemesanan</a></li>
+                        <li><a href="#">Lacak Pesanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-social">
+                    <h4>Ikuti Kami</h4>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> AromaPedia. Dirancang dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk pecinta kopi.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

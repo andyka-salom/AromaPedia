@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk - AromaPedia</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Jika ingin menggunakan noUiSlider untuk price range, uncomment ini -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"> -->
+</head>
+<body>
+
+    <header id="main-header">
+        <nav class="container">
+            <a href="#" class="logo animate-on-scroll fade-in-down">AromaPedia</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#featured-products">Produk</a></li>
+                <li><a href="#featured-articles">Blog</a></li>
+                <li><a href="catalog.html">Toko</a></li>
+                <li><a href="cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-header-section bg-light">
+            <div class="container">
+                <h1>Koleksi Produk Kami</h1>
+                <p>Temukan alat dan biji kopi terbaik untuk setiap selera.</p>
+            </div>
+        </section>
+
+        <!-- PROMO BANNER (OPSIONAL) -->
+        <section class="promo-banner-section">
+            <div class="container animate-on-scroll fade-in">
+                <div class="promo-banner-content">
+                    <h3><i class="fas fa-tag"></i> Diskon Spesial Akhir Pekan!</h3>
+                    <p>Dapatkan potongan 15% untuk semua produk Biji Kopi Single Origin. Gunakan kode: <strong>KOPIWEEKEND</strong></p>
+                    <a href="#biji-kopi-section" class="btn btn-secondary">Lihat Biji Kopi <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATALOG CONTENT -->
+        <section class="catalog-section section-padding">
+            <div class="container">
+                <div class="catalog-layout-wrapper">
+                    <!-- FILTERS SIDEBAR -->
+                    <aside class="catalog-sidebar animate-on-scroll fade-in-left">
+                        <div class="sidebar-widget">
+                            <h4>Kategori Produk</h4>
+                            <ul class="category-filter-list">
+                                <li><a href="#" data-category="all" class="active">Semua Produk <span class="count-badge">25</span></a></li>
+                                <li><a href="#" data-category="grinder">Grinder <span class="count-badge">5</span></a></li>
+                                <li><a href="#" data-category="mesin-espresso">Mesin Espresso <span class="count-badge">3</span></a></li>
+                                <li><a href="#" data-category="manual-brew">Manual Brew <span class="count-badge">8</span></a></li>
+                                <li><a href="#" data-category="biji-kopi" id="biji-kopi-section">Biji Kopi <span class="count-badge">7</span></a></li>
+                                <li><a href="#" data-category="aksesoris">Aksesoris <span class="count-badge">2</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h4>Filter Harga</h4>
+                            <div class="price-range-filter">
+                                <div class="price-inputs">
+                                    <div class="price-input-group">
+                                        <label for="min-price">Min</label>
+                                        <input type="number" id="min-price" placeholder="0" aria-label="Harga Minimum">
+                                    </div>
+                                    <span>-</span>
+                                    <div class="price-input-group">
+                                        <label for="max-price">Max</label>
+                                        <input type="number" id="max-price" placeholder="1jt+" aria-label="Harga Maksimum">
+                                    </div>
+                                </div>
+                                <button class="btn btn-filter-price">Terapkan</button>
+                                <!-- Untuk noUiSlider, uncomment ini: -->
+                                <!-- <div id="price-slider" class="noUi-target"></div> -->
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h4>Merek</h4>
+                            <ul class="checkbox-filter-list">
+                                <li><label><input type="checkbox" name="brand" value="hario" data-filter-type="brand"> Hario</label></li>
+                                <li><label><input type="checkbox" name="brand" value="timemore" data-filter-type="brand"> Timemore</label></li>
+                                <li><label><input type="checkbox" name="brand" value="delonghi" data-filter-type="brand"> DeLonghi</label></li>
+                                <li><label><input type="checkbox" name="brand" value="aromapedia-beans" data-filter-type="brand"> AromaPedia Beans</label></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h4>Rating</h4>
+                            <ul class="rating-filter-list">
+                                <li><a href="#" data-rating="5" class="filter-rating-link">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </a></li>
+                                <li><a href="#" data-rating="4" class="filter-rating-link">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> & Ke Atas
+                                </a></li>
+                                <li><a href="#" data-rating="3" class="filter-rating-link">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> & Ke Atas
+                                </a></li>
+                            </ul>
+                        </div>
+                         <div class="sidebar-widget">
+                            <h4>Warna</h4>
+                            <div class="color-filter-swatches">
+                                <span class="color-swatch" style="background-color: #333;" data-color="hitam" aria-label="Hitam" title="Hitam"></span>
+                                <span class="color-swatch" style="background-color: #C0C0C0;" data-color="silver" aria-label="Silver" title="Silver"></span>
+                                <span class="color-swatch" style="background-color: #fff; border: 1px solid #ccc;" data-color="putih" aria-label="Putih" title="Putih"></span>
+                                <span class="color-swatch" style="background-color: #B71C1C;" data-color="merah" aria-label="Merah" title="Merah"></span>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget">
+                            <button class="btn btn-outline-secondary reset-filters-btn" style="width:100%;">Reset Filter</button>
+                        </div>
+                    </aside>
+
+                    <!-- MAIN PRODUCT LISTING -->
+                    <div class="catalog-main-content">
+                        <div class="catalog-controls animate-on-scroll fade-in">
+                            <div class="product-search-bar">
+                                <form id="productSearchForm" action="#" method="get">
+                                    <input type="search" name="search_product" id="searchProductInput" placeholder="Cari nama produk..." aria-label="Cari Produk">
+                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="product-sort-options">
+                                <label for="sort-by">Urutkan:</label>
+                                <select name="sort_by" id="sort-by" aria-label="Urutkan Produk">
+                                    <option value="relevance">Relevansi</option>
+                                    <option value="terlaris">Terlaris</option>
+                                    <option value="terbaru">Terbaru</option>
+                                    <option value="harga_asc">Harga (Rendah - Tinggi)</option>
+                                    <option value="harga_desc">Harga (Tinggi - Rendah)</option>
+                                    <option value="nama_asc">Nama (A - Z)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <p class="filter-results-info" style="margin-bottom: 20px; font-size: 0.9rem; color: var(--medium-text); display: none;">
+                            Menampilkan <span id="productCount">X</span> produk.
+                        </p>
+
+                        <div class="product-grid-catalog">
+                            <!-- Produk akan di-generate oleh JS atau di-hardcode -->
+                            <!-- Contoh Produk Card 1 -->
+                            <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="manual-brew" data-brand="hario" data-color="putih" data-price="350000" data-rating="4.5" data-name="Hario V60 Ceramic Dripper">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/D2B48C/333333?text=Hario+V60" alt="Hario V60 Dripper" class="product-main-image">
+                                    <img src="https://placehold.co/400x350/C1A78A/333333?text=V60+Angle+2" alt="Hario V60 Angle" class="product-hover-image">
+                                    <span class="product-badge new">Baru!</span>
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P001" class="product-name">Hario V60 Ceramic Dripper</a>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                        <span class="rating-count">(35)</span>
+                                    </div>
+                                    <p class="product-price">Rp 350.000</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P001"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P001" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Contoh Produk Card 2 (dengan diskon) -->
+                            <article class="product-card-catalog animate-on-scroll fade-in-up" data-delay="0.1s" data-category="biji-kopi" data-brand="aromapedia-beans" data-color="coklat" data-price="102000" data-rating="5" data-name="Biji Kopi Gayo Wine Process">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/8B4513/FFFFFF?text=Gayo+Beans+1" alt="Biji Kopi Gayo Wine" class="product-main-image">
+                                    <img src="https://placehold.co/400x350/7A3D0F/FFFFFF?text=Gayo+Beans+2" alt="Biji Kopi Gayo Wine Detail" class="product-hover-image">
+                                    <span class="product-badge discount">-15%</span>
+                                    <button class="wishlist-btn-card active" aria-label="Hapus dari Wishlist"><i class="fas fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P002" class="product-name">Biji Kopi Gayo Wine Process</a>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <span class="rating-count">(52)</span>
+                                    </div>
+                                    <p class="product-price">
+                                        <span class="discounted-price">Rp 102.000</span>
+                                        <span class="original-price">Rp 120.000</span>
+                                        <span class="unit">/ 200g</span>
+                                    </p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P002"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P002" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                            
+                            <!-- Contoh Produk Card 3 -->
+                            <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="grinder" data-brand="timemore" data-color="hitam" data-price="750000" data-rating="4" data-name="Timemore Chestnut C2 Grinder">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/A9A9A9/333333?text=Timemore+C2" alt="Timemore C2 Grinder" class="product-main-image">
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P003" class="product-name">Timemore Chestnut C2 Grinder</a>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                        <span class="rating-count">(28)</span>
+                                    </div>
+                                    <p class="product-price">Rp 750.000</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P003"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P003" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Tambahkan 5 produk lagi untuk total 8 produk contoh -->
+                             <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="mesin-espresso" data-brand="delonghi" data-color="silver" data-price="2500000" data-rating="4.2" data-name="DeLonghi Dedica EC685">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/BDBDBD/333333?text=Dedica+EC685" alt="DeLonghi Dedica" class="product-main-image">
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P004" class="product-name">DeLonghi Dedica EC685</a>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                        <span class="rating-count">(15)</span>
+                                    </div>
+                                    <p class="product-price">Rp 2.500.000</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P004"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P004" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                             <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="aksesoris" data-brand="hario" data-color="transparan" data-price="200000" data-rating="4.8" data-name="Hario Server V60 Glass">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/E0E0E0/333333?text=Hario+Server" alt="Hario Server" class="product-main-image">
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P005" class="product-name">Hario Server V60 Glass 600ml</a>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                        <span class="rating-count">(40)</span>
+                                    </div>
+                                    <p class="product-price">Rp 200.000</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P005"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P005" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                             <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="biji-kopi" data-brand="aromapedia-beans" data-color="coklat" data-price="150000" data-rating="4.6" data-name="Biji Kopi Sidikalang Robusta">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/6D4C41/FFFFFF?text=Sidikalang" alt="Biji Kopi Sidikalang" class="product-main-image">
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P006" class="product-name">Biji Kopi Sidikalang Robusta</a>
+                                    <div class="product-rating">
+                                       <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                        <span class="rating-count">(22)</span>
+                                    </div>
+                                    <p class="product-price">Rp 150.000 <span class="unit">/ 250g</span></p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P006"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P006" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="manual-brew" data-brand="timemore" data-color="hitam" data-price="450000" data-rating="4.7" data-name="Timemore French Press U">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/424242/FFFFFF?text=Timemore+FP" alt="Timemore French Press" class="product-main-image">
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P007" class="product-name">Timemore French Press U 450ml</a>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                        <span class="rating-count">(18)</span>
+                                    </div>
+                                    <p class="product-price">Rp 450.000</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P007"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P007" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                             <article class="product-card-catalog animate-on-scroll fade-in-up" data-category="aksesoris" data-brand="hario" data-color="transparan" data-price="180000" data-rating="4.9" data-name="Hario Paper Filter V60 02 (100pcs)">
+                                <div class="product-image-wrapper">
+                                    <img src="https://placehold.co/400x350/F5F5F5/333333?text=Hario+Filter" alt="Hario Paper Filter" class="product-main-image">
+                                    <button class="wishlist-btn-card" aria-label="Tambah ke Wishlist"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="product-info">
+                                    <a href="product-detail.html?id=P008" class="product-name">Hario Paper Filter V60 02 (100pcs)</a>
+                                    <div class="product-rating">
+                                       <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <span class="rating-count">(75)</span>
+                                    </div>
+                                    <p class="product-price">Rp 180.000</p>
+                                    <div class="product-actions">
+                                        <button class="btn btn-outline-primary add-to-cart-btn" data-product-id="P008"><i class="fas fa-cart-plus"></i></button>
+                                        <a href="product-detail.html?id=P008" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div id="noResultsMessage" class="no-results-message" style="display: none; text-align: center; padding: 40px 0;">
+                            <i class="fas fa-box-open fa-3x" style="color: var(--medium-text); margin-bottom: 15px;"></i>
+                            <p style="font-size: 1.1rem; color: var(--medium-text);">Oops! Produk tidak ditemukan.</p>
+                            <p style="font-size: 0.9rem; color: var(--medium-text);">Coba kata kunci lain atau ubah filter Anda.</p>
+                        </div>
+
+
+                        <!-- PAGINATION -->
+                        <nav class="pagination animate-on-scroll fade-in">
+                           <a href="#" class="page-numbers prev disabled" data-page="prev"><i class="fas fa-chevron-left"></i></a>
+                            <!-- Dots akan di-generate oleh JS -->
+                           <a href="#" class="page-numbers next" data-page="next"><i class="fas fa-chevron-right"></i></a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column footer-about">
+                    <h3 class="logo-footer">AromaPedia</h3>
+                    <p>Menemani setiap seduhan kopi Anda dengan produk berkualitas dan pengetahuan yang mencerahkan.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigasi Cepat</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Cara Pemesanan</a></li>
+                        <li><a href="#">Lacak Pesanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-social">
+                    <h4>Ikuti Kami</h4>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> AromaPedia. Dirancang dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk pecinta kopi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <!-- Jika ingin menggunakan noUiSlider, uncomment ini -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kelola Pengguna - AromaPedia</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+    <div class="admin-layout-wrapper">
+        <!-- ADMIN SIDEBAR -->
+        <aside class="admin-sidebar">
+            <a href="admin-dashboard.html" class="admin-logo">AromaPedia Admin</a>
+            <ul class="admin-nav-list">
+                <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="admin-articles.html"><i class="fas fa-newspaper"></i> Kelola Artikel</a></li>
+                <li><a href="admin-products.html"><i class="fas fa-box-open"></i> Kelola Produk</a></li>
+                <li><a href="admin-users.html" class="active"><i class="fas fa-users-cog"></i> Kelola Pengguna</a></li>
+                <li><a href="admin-transactions.html"><i class="fas fa-receipt"></i> Kelola Transaksi</a></li>
+                <li><a href="index.html" target="_blank"><i class="fas fa-globe"></i> Lihat Website</a></li>
+                <li><a href="#" id="adminLogoutBtn"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+            </ul>
+        </aside>
+
+        <!-- ADMIN MAIN CONTENT -->
+        <main class="admin-main-content">
+            <header class="admin-content-header">
+                <button id="adminMenuToggle" class="admin-menu-toggle-btn"><i class="fas fa-bars"></i></button>
+                <h1>Kelola Pengguna</h1>
+                <a href="admin-user-form.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Tambah Pengguna Baru</a>
+            </header>
+
+            <section class="admin-content-area">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3>Daftar Pengguna</h3>
+                        <div class="admin-table-filters">
+                            <input type="search" placeholder="Cari nama atau email..." id="adminSearchUsers">
+                            <select id="adminFilterUserRole">
+                                <option value="">Semua Peran</option>
+                                <option value="admin">Admin</option>
+                                <option value="customer">Pelanggan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="admin-table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAllUsers" aria-label="Pilih semua pengguna"></th>
+                                        <th>Nama Pengguna</th>
+                                        <th>Email</th>
+                                        <th>Peran</th>
+                                        <th>Tanggal Registrasi</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminUserTableBody">
+                                    <!-- Contoh Row Pengguna 1 -->
+                                    <tr data-user-id="U001" data-role="admin">
+                                        <td><input type="checkbox" class="select-user-item" value="U001"></td>
+                                        <td><strong>Admin Utama</strong></td>
+                                        <td>admin@aromapedia.com</td>
+                                        <td><span class="role-badge role-admin">Admin</span></td>
+                                        <td>01 Jan 2023</td>
+                                        <td class="action-btns">
+                                            <a href="admin-user-form.html?id=U001" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <button class="btn-action btn-delete" title="Hapus" data-id="U001" data-name="Admin Utama" disabled><i class="fas fa-trash-alt"></i></button> <!-- Admin utama tidak bisa dihapus -->
+                                        </td>
+                                    </tr>
+                                    <!-- Contoh Row Pengguna 2 -->
+                                    <tr data-user-id="U002" data-role="customer">
+                                        <td><input type="checkbox" class="select-user-item" value="U002"></td>
+                                        <td>John Doe</td>
+                                        <td>john.doe@example.com</td>
+                                        <td><span class="role-badge role-customer">Pelanggan</span></td>
+                                        <td>15 Mar 2023</td>
+                                        <td class="action-btns">
+                                            <a href="admin-user-form.html?id=U002" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <button class="btn-action btn-delete" title="Hapus" data-id="U002" data-name="John Doe"><i class="fas fa-trash-alt"></i></button>
+                                            <a href="account-history.html?user_id=U002" target="_blank" class="btn-action btn-view" title="Lihat Riwayat Pesanan"><i class="fas fa-history"></i></a>
+                                        </td>
+                                    </tr>
+                                     <!-- Contoh Row Pengguna 3 -->
+                                    <tr data-user-id="U003" data-role="customer">
+                                        <td><input type="checkbox" class="select-user-item" value="U003"></td>
+                                        <td>Jane Smith</td>
+                                        <td>jane.smith@example.com</td>
+                                        <td><span class="role-badge role-customer">Pelanggan</span></td>
+                                        <td>20 Mei 2023</td>
+                                        <td class="action-btns">
+                                            <a href="admin-user-form.html?id=U003" class="btn-action btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <button class="btn-action btn-delete" title="Hapus" data-id="U003" data-name="Jane Smith"><i class="fas fa-trash-alt"></i></button>
+                                             <a href="account-history.html?user_id=U003" target="_blank" class="btn-action btn-view" title="Lihat Riwayat Pesanan"><i class="fas fa-history"></i></a>
+                                        </td>
+                                    </tr>
+                                    <!-- Tambah row pengguna lain -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="admin-table-bulk-actions" style="margin-top: 20px; display: none;">
+                            <select id="bulkUserActionSelect">
+                                <option value="">Aksi Massal...</option>
+                                <option value="change_role_customer">Ubah Peran ke Pelanggan</option>
+                                <option value="change_role_admin">Ubah Peran ke Admin</option>
+                                <option value="delete">Hapus Pengguna</option>
+                            </select>
+                            <button id="applyUserBulkActionBtn" class="btn btn-secondary btn-sm">Terapkan</button>
+                        </div>
+                        <nav class="pagination admin-pagination">
+                            <!-- Pagination -->
+                        </nav>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

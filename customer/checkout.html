@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AromaPedia</title>
+    <link rel="stylesheet" href="../styles.css">
+    <!-- <link rel="stylesheet" href="checkout-styles.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+<header id="main-header">
+        <nav class="container">
+            <a href="#" class="logo animate-on-scroll fade-in-down">AromaPedia</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#featured-products">Produk</a></li>
+                <li><a href="#featured-articles">Blog</a></li>
+                <li><a href="catalog.html">Toko</a></li>
+                <li><a href="cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-header-section bg-light">
+            <div class="container">
+                <h1>Proses Pembayaran</h1>
+                <p>Lengkapi detail Anda untuk menyelesaikan pesanan.</p>
+            </div>
+        </section>
+
+        <!-- CHECKOUT CONTENT -->
+        <section class="checkout-section section-padding">
+            <div class="container">
+                <div class="checkout-layout-wrapper">
+                    <!-- CHECKOUT FORM (Multi-Step Accordion) -->
+                    <div class="checkout-form-container">
+                        <div class="checkout-steps">
+                            <!-- STEP 1: Informasi Pengiriman -->
+                            <div class="checkout-step active" id="step-shipping">
+                                <div class="step-header">
+                                    <h2><span class="step-number">1</span> Informasi Pengiriman</h2>
+                                    <div class="step-summary" style="display:none;">Ringkasan Alamat Disini</div>
+                                    <button class="btn-edit-step" style="display:none;">Ubah</button>
+                                </div>
+                                <div class="step-content">
+                                    <div class="checkout-login-options">
+                                        <p>Sudah punya akun? <a href="#">Masuk disini</a></p>
+                                        <p>Atau lanjutkan sebagai tamu.</p>
+                                    </div>
+                                    <form id="shipping-form">
+                                        <div class="form-group">
+                                            <label for="email">Alamat Email *</label>
+                                            <input type="email" id="email" name="email" required>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="first-name">Nama Depan *</label>
+                                                <input type="text" id="first-name" name="first_name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="last-name">Nama Belakang *</label>
+                                                <input type="text" id="last-name" name="last_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Nomor Telepon *</label>
+                                            <input type="tel" id="phone" name="phone" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address1">Alamat Lengkap *</label>
+                                            <input type="text" id="address1" name="address1" placeholder="Nama Jalan, Nomor Rumah" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="address2" name="address2" placeholder="RT/RW, Kelurahan (Opsional)">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="city">Kota/Kabupaten *</label>
+                                                <input type="text" id="city" name="city" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="province">Provinsi *</label>
+                                                <select id="province" name="province" required>
+                                                    <option value="">Pilih Provinsi</option>
+                                                    <option value="jakarta">DKI Jakarta</option>
+                                                    <option value="jabar">Jawa Barat</option>
+                                                    <!-- Tambah provinsi lain -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="postcode">Kode Pos *</label>
+                                            <input type="text" id="postcode" name="postcode" required>
+                                        </div>
+                                        <div class="form-group form-checkbox">
+                                            <input type="checkbox" id="save-address" name="save_address">
+                                            <label for="save-address">Simpan alamat ini untuk nanti (jika login)</label>
+                                        </div>
+                                        <div class="form-group form-checkbox">
+                                            <input type="checkbox" id="is-dropship" name="is_dropship">
+                                            <label for="is-dropship">Kirim sebagai Dropshipper</label>
+                                        </div>
+                                        <div id="dropship-fields" style="display:none;">
+                                            <div class="form-group">
+                                                <label for="dropship-name">Nama Pengirim (Dropship) *</label>
+                                                <input type="text" id="dropship-name" name="dropship_name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dropship-phone">No. Telepon Pengirim (Dropship) *</label>
+                                                <input type="tel" id="dropship-phone" name="dropship_phone">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary btn-next-step" data-next-step="step-delivery">Lanjut ke Pengiriman</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- STEP 2: Pengiriman & Pembayaran -->
+                            <div class="checkout-step" id="step-delivery">
+                                <div class="step-header">
+                                    <h2><span class="step-number">2</span> Pengiriman & Pembayaran</h2>
+                                    <div class="step-summary" style="display:none;">Ringkasan Pengiriman & Pembayaran Disini</div>
+                                    <button class="btn-edit-step" style="display:none;">Ubah</button>
+                                </div>
+                                <div class="step-content" style="display:none;">
+                                    <div class="shipping-options">
+                                        <h4>Pilih Metode Pengiriman</h4>
+                                        <label class="option-box">
+                                            <input type="radio" name="shipping_method" value="reguler" checked>
+                                            <div class="option-content">
+                                                <strong>Reguler (JNE/Sicepat)</strong>
+                                                <span>Estimasi 2-4 hari kerja</span>
+                                            </div>
+                                            <span class="option-price">Rp 15.000</span>
+                                        </label>
+                                        <label class="option-box">
+                                            <input type="radio" name="shipping_method" value="express">
+                                            <div class="option-content">
+                                                <strong>Express (GoSend/GrabExpress)</strong>
+                                                <span>Estimasi 1 hari kerja (Same Day)</span>
+                                            </div>
+                                            <span class="option-price">Rp 30.000</span>
+                                        </label>
+                                    </div>
+                                    <div class="payment-options">
+                                        <h4>Pilih Metode Pembayaran</h4>
+                                        <label class="option-box">
+                                            <input type="radio" name="payment_method" value="va" checked>
+                                            <div class="option-content">
+                                                <img src="https://placehold.co/40x25/CCCCCC/777777?text=VA" alt="VA Icon">
+                                                <strong>Virtual Account (BCA, Mandiri, BNI, dll)</strong>
+                                            </div>
+                                        </label>
+                                        <label class="option-box">
+                                            <input type="radio" name="payment_method" value="ewallet">
+                                            <div class="option-content">
+                                                <img src="https://placehold.co/40x25/CCCCCC/777777?text=QRIS" alt="QRIS Icon">
+                                                <strong>QRIS (GoPay, OVO, Dana, ShopeePay)</strong>
+                                            </div>
+                                        </label>
+                                        <label class="option-box">
+                                            <input type="radio" name="payment_method" value="cc">
+                                            <div class="option-content">
+                                                <img src="https://placehold.co/40x25/CCCCCC/777777?text=CC" alt="CC Icon">
+                                                <strong>Kartu Kredit/Debit (Visa, Mastercard)</strong>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary btn-prev-step" data-prev-step="step-shipping">Kembali</button>
+                                    <button type="button" class="btn btn-primary btn-next-step" data-next-step="step-review">Lanjut ke Ringkasan</button>
+                                </div>
+                            </div>
+
+                            <!-- STEP 3: Ringkasan Pesanan -->
+                            <div class="checkout-step" id="step-review">
+                                <div class="step-header">
+                                    <h2><span class="step-number">3</span> Ringkasan Pesanan</h2>
+                                </div>
+                                <div class="step-content" style="display:none;">
+                                    <div class="final-review">
+                                        <div class="review-section">
+                                            <h4>Alamat Pengiriman:</h4>
+                                            <p id="review-shipping-address">Jl. Kopi Enak No. 1, Jakarta Pusat, DKI Jakarta, 10110</p>
+                                            <p id="review-shipping-contact">John Doe, 081234567890</p>
+                                        </div>
+                                        <div class="review-section">
+                                            <h4>Metode Pengiriman:</h4>
+                                            <p id="review-shipping-method">Reguler (JNE/Sicepat) - Rp 15.000</p>
+                                        </div>
+                                        <div class="review-section">
+                                            <h4>Metode Pembayaran:</h4>
+                                            <p id="review-payment-method">Virtual Account (BCA)</p>
+                                        </div>
+                                        <p class="terms-agreement">
+                                            <input type="checkbox" id="agree-terms" name="agree_terms" required>
+                                            <label for="agree-terms">Saya telah membaca dan menyetujui <a href="#">Syarat & Ketentuan</a> yang berlaku.</label>
+                                        </p>
+                                        <button type="button" class="btn btn-outline-primary btn-prev-step" data-prev-step="step-delivery">Kembali</button>
+                                        <button type="submit" class="btn btn-primary btn-place-order" id="placeOrderBtn"><i class="fas fa-shield-alt"></i> Bayar Sekarang</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ORDER SUMMARY (STICKY SIDEBAR) -->
+                    <aside class="checkout-order-summary">
+                        <div class="order-summary-box">
+                            <h3>Pesanan Anda</h3>
+                            <ul class="summary-item-list">
+                                <!-- Item dari Keranjang (contoh) -->
+                                <li class="summary-item">
+                                    <img src="https://placehold.co/60x60/D2B48C/333333?text=V60" alt="V60 Dripper">
+                                    <div class="item-details">
+                                        <span>Hario V60 Ceramic Dripper</span>
+                                        <small>Qty: 1</small>
+                                    </div>
+                                    <span class="item-price">Rp 350.000</span>
+                                </li>
+                                <li class="summary-item">
+                                    <img src="https://placehold.co/60x60/8B4513/FFFFFF?text=Gayo" alt="Biji Kopi">
+                                    <div class="item-details">
+                                        <span>Biji Kopi Gayo Wine Process (200g)</span>
+                                        <small>Qty: 2</small>
+                                    </div>
+                                    <span class="item-price">Rp 204.000</span>
+                                </li>
+                            </ul>
+                            <div class="summary-calculation">
+                                <div class="summary-row">
+                                    <span>Subtotal</span>
+                                    <span id="checkoutSummarySubtotal">Rp 554.000</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Ongkos Kirim</span>
+                                    <span id="checkoutSummaryShipping">Rp 15.000</span>
+                                </div>
+                                <div class="summary-row coupon-applied-row" style="display:none;">
+                                    <span>Diskon Kupon (<span id="checkoutCouponCode"></span>)</span>
+                                    <span id="checkoutCouponDiscount" class="discount-amount">- Rp 0</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Total Pembayaran</span>
+                                    <strong id="checkoutSummaryTotal">Rp 569.000</strong>
+                                </div>
+                            </div>
+                            <div class="checkout-secure-info">
+                                <i class="fas fa-lock"></i> Pembayaran aman & terenkripsi
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column footer-about">
+                    <h3 class="logo-footer">AromaPedia</h3>
+                    <p>Menemani setiap seduhan kopi Anda dengan produk berkualitas dan pengetahuan yang mencerahkan.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigasi Cepat</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Cara Pemesanan</a></li>
+                        <li><a href="#">Lacak Pesanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-social">
+                    <h4>Ikuti Kami</h4>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> AromaPedia. Dirancang dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk pecinta kopi.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

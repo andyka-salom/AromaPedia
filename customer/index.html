@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AromaPedia - Seduh Cerita Kopimu</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="main-header">
+        <nav class="container">
+            <a href="#" class="logo animate-on-scroll fade-in-down">AromaPedia</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#featured-products">Produk</a></li>
+                <li><a href="#featured-articles">Blog</a></li>
+                <li><a href="catalog.html">Toko</a></li>
+                <li><a href="cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-maker-making-espresso-3577-large.mp4" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content container">
+                <h1 class="animate-on-scroll fade-in-up" data-delay="0.2s">Seduh Cerita Kopimu.</h1>
+                <p class="animate-on-scroll fade-in-up" data-delay="0.4s">Temukan biji kopi pilihan, alat seduh berkualitas, dan inspirasi tanpa batas di AromaPedia.</p>
+                <div class="cta-buttons animate-on-scroll fade-in-up" data-delay="0.6s">
+                    <a href="#featured-products" class="btn btn-primary">Jelajahi Koleksi</a>
+                    <a href="#featured-articles" class="btn btn-secondary">Baca Tips Terbaru</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PRODUCTS -->
+        <section id="featured-products" class="featured-products-section section-padding">
+            <div class="container">
+                <div class="section-header animate-on-scroll fade-in">
+                    <h2>Produk Unggulan Kami</h2>
+                    <p>Pilihan terbaik untuk pengalaman menyeduh kopi yang tak terlupakan.</p>
+                </div>
+                <div class="product-grid">
+                    <!-- Produk 1 -->
+                    <article class="product-card animate-on-scroll fade-in-up" data-delay="0.1s">
+                        <div class="card-image-wrapper">
+                            <img src="https://placehold.co/400x350/E1C16E/333333?text=Alat+Kopi+1" alt="Aeropress Go">
+                        </div>
+                        <div class="product-info">
+                            <h3>Aeropress Go</h3>
+                            <p class="price">Rp 550.000</p>
+                            <a href="#" class="btn btn-card">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <!-- Produk 2 -->
+                    <article class="product-card animate-on-scroll fade-in-up" data-delay="0.2s">
+                        <div class="card-image-wrapper">
+                            <img src="https://placehold.co/400x350/D2B48C/333333?text=Biji+Kopi" alt="Biji Kopi Gayo Wine">
+                        </div>
+                        <div class="product-info">
+                            <h3>Biji Kopi Gayo Wine</h3>
+                            <p class="price">Rp 120.000 <span class="unit">/ 200g</span></p>
+                            <a href="#" class="btn btn-card">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <!-- Produk 3 -->
+                    <article class="product-card animate-on-scroll fade-in-up" data-delay="0.3s">
+                        <div class="card-image-wrapper">
+                           <img src="https://placehold.co/400x350/C0A080/333333?text=Grinder+Pro" alt="Hario Skerton Pro">
+                        </div>
+                        <div class="product-info">
+                            <h3>Hario Skerton Pro</h3>
+                            <p class="price">Rp 850.000</p>
+                            <a href="#" class="btn btn-card">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED ARTICLES -->
+        <section id="featured-articles" class="featured-articles-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header animate-on-scroll fade-in">
+                    <h2>Dari Blog Kami</h2>
+                    <p>Inspirasi dan pengetahuan seputar dunia kopi untuk Anda.</p>
+                </div>
+                <div class="article-grid">
+                    <!-- Artikel 1 -->
+                    <article class="article-card animate-on-scroll fade-in-up" data-delay="0.1s">
+                        <div class="card-image-wrapper">
+                            <img src="https://placehold.co/400x280/A0522D/FFFFFF?text=Teknik+Seduh" alt="Teknik Dasar Manual Brew">
+                        </div>
+                        <div class="article-info">
+                            <span class="article-category">Teknik Seduh</span>
+                            <h3>5 Teknik Dasar Manual Brew untuk Pemula</h3>
+                            <p class="excerpt">Pelajari dasar-dasar menyeduh kopi manual di rumah dengan hasil maksimal...</p>
+                            <a href="#" class="btn-link">Baca Selengkapnya <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                    </article>
+                    <!-- Artikel 2 -->
+                    <article class="article-card animate-on-scroll fade-in-up" data-delay="0.2s">
+                         <div class="card-image-wrapper">
+                            <img src="https://placehold.co/400x280/8B4513/FFFFFF?text=Review+Biji" alt="Review Biji Kopi Flores">
+                        </div>
+                        <div class="article-info">
+                            <span class="article-category">Review Biji</span>
+                            <h3>Review Jujur: Biji Kopi Single Origin Flores Bajawa</h3>
+                            <p class="excerpt">Bagaimana rasa dan aroma dari biji kopi Flores Bajawa yang terkenal itu? Simak ulasan...</p>
+                            <a href="#" class="btn-link">Baca Selengkapnya <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                    </article>
+                     <!-- Artikel 3 -->
+                    <article class="article-card animate-on-scroll fade-in-up" data-delay="0.3s">
+                        <div class="card-image-wrapper">
+                           <img src="https://placehold.co/400x280/8B5A2B/FFFFFF?text=Tips+Kopi" alt="Tips Memilih Grinder">
+                        </div>
+                        <div class="article-info">
+                             <span class="article-category">Tips & Trik</span>
+                            <h3>Tips Memilih Grinder Kopi Sesuai Budget</h3>
+                            <p class="excerpt">Jangan salah pilih! Grinder adalah investasi penting. Berikut panduannya agar tak salah langkah...</p>
+                            <a href="#" class="btn-link">Baca Selengkapnya <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY AROMAPEDIA -->
+        <section id="value-proposition" class="value-proposition-section section-padding">
+            <div class="container">
+                <div class="section-header animate-on-scroll fade-in">
+                    <h2>Kenapa Memilih AromaPedia?</h2>
+                </div>
+                <div class="value-items-grid">
+                    <div class="value-item animate-on-scroll fade-in-up" data-delay="0.1s">
+                        <div class="value-icon"><i class="fas fa-award"></i></div>
+                        <h3>Kualitas Terkurasi</h3>
+                        <p>Setiap produk dipilih dengan cermat untuk memastikan kualitas terbaik bagi Anda.</p>
+                    </div>
+                    <div class="value-item animate-on-scroll fade-in-up" data-delay="0.2s">
+                        <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Panduan Ahli</h3>
+                        <p>Dapatkan tips, trik, dan pengetahuan mendalam dari para ahli kopi kami.</p>
+                    </div>
+                    <div class="value-item animate-on-scroll fade-in-up" data-delay="0.3s">
+                        <div class="value-icon"><i class="fas fa-users"></i></div>
+                        <h3>Komunitas Pecinta Kopi</h3>
+                        <p>Bergabunglah dengan komunitas yang berbagi semangat dan kecintaan pada kopi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section id="testimonials" class="testimonials-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header animate-on-scroll fade-in">
+                    <h2>Apa Kata Mereka?</h2>
+                </div>
+                <div class="testimonial-carousel-wrapper animate-on-scroll fade-in-up">
+                    <div class="testimonial-carousel">
+                        <div class="testimonial-slide">
+                            <blockquote>
+                                "Produknya original dan pengirimannya cepat. Blognya juga sangat informatif buat pemula seperti saya! AromaPedia the best!"
+                            </blockquote>
+                            <div class="cite-wrapper">
+                                <img src="https://placehold.co/60x60/7F8C8D/FFFFFF?text=A" alt="Andi" class="cite-avatar">
+                                <cite>Andi, Jakarta</cite>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <blockquote>
+                                "Akhirnya nemu toko online kopi yang lengkap! Dari alat sampai biji, semua ada. Plus, tipsnya berguna banget. Highly recommended!"
+                            </blockquote>
+                             <div class="cite-wrapper">
+                                <img src="https://placehold.co/60x60/2ECC71/FFFFFF?text=R" alt="Rina" class="cite-avatar">
+                                <cite>Rina, Bandung</cite>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <blockquote>
+                                "Suka banget sama konsep AromaPedia. Belanja sambil belajar. Barista rumahan jadi makin pede nih. Thanks AromaPedia!"
+                            </blockquote>
+                            <div class="cite-wrapper">
+                                <img src="https://placehold.co/60x60/3498DB/FFFFFF?text=B" alt="Bayu" class="cite-avatar">
+                                <cite>Bayu, Surabaya</cite>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn prev-btn" aria-label="Previous Testimonial"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next-btn" aria-label="Next Testimonial"><i class="fas fa-chevron-right"></i></button>
+                    <div class="carousel-dots"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEWSLETTER SIGNUP -->
+        <section id="newsletter" class="newsletter-section section-padding">
+            <div class="container animate-on-scroll fade-in">
+                <h2>Jangan Ketinggalan Info!</h2>
+                <p>Dapatkan update produk terbaru, artikel menarik, dan promo spesial langsung ke email Anda.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Masukkan alamat email Anda" required aria-label="Alamat Email">
+                    <button type="submit" class="btn btn-primary">Subscribe <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column footer-about">
+                    <h3 class="logo-footer">AromaPedia</h3>
+                    <p>Menemani setiap seduhan kopi Anda dengan produk berkualitas dan pengetahuan yang mencerahkan.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigasi Cepat</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Cara Pemesanan</a></li>
+                        <li><a href="#">Lacak Pesanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-social">
+                    <h4>Ikuti Kami</h4>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> AromaPedia. Dirancang dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk pecinta kopi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
