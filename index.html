@@ -7,19 +7,111 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Modal Styles (add to your styles.css or here for quick test) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            padding-top: 60px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 5% from the top and centered */
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 450px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            position: relative; /* For the close button */
+        }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .modal-content input[type="email"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* So padding doesn't affect width */
+            font-size: 1rem;
+        }
+         .modal-content input[type="email"]:focus,
+        .modal-content input[type="password"]:focus {
+            border-color: var(--primary-color, #8B4513);
+            outline: none;
+        }
+
+        .modal-content button[type="submit"] {
+            background-color: var(--primary-color, #8B4513); /* Use your theme color */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button[type="submit"]:hover {
+            background-color: var(--secondary-color, #A0522D); /* Darker shade */
+        }
+        .modal-content .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
     <header id="main-header">
         <nav class="container">
             <a href="#" class="logo animate-on-scroll fade-in-down">AromaPedia</a>
-            <ul class="nav-links">
-                <li><a href="#hero">Beranda</a></li>
-                <li><a href="#featured-products">Produk</a></li>
-                <li><a href="#featured-articles">Blog</a></li>
-                <li><a href="./customer/catalog.html">Toko</a></li>
-                <li><a href="./customer/cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i></a></li>
-                <li><a href="./customer/account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>
+            <ul class="nav-links" id="nav-links-container">
+                <!-- Nav links will be populated by JavaScript -->
             </ul>
             <button class="menu-toggle" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
@@ -31,9 +123,10 @@
         <!-- HERO SECTION -->
         <section id="hero" class="hero-section">
             <video autoplay muted loop playsinline class="hero-video">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-coffee-maker-making-espresso-3577-large.mp4" type="video/mp4">
+                <source src="https://videocdn.cdnpk.net/videos/dd2ec765-b5a2-5eef-a6e5-bfcfeada4f09/horizontal/previews/clear/large.mp4?token=exp=1750904078~hmac=568d1f4259274f27625bc24723c474a0d490b51cb88a8a490ceecfcf50a3a707" type="video/mp4">
                 Browser Anda tidak mendukung tag video.
             </video>
+
             <div class="hero-overlay"></div>
             <div class="hero-content container">
                 <h1 class="animate-on-scroll fade-in-up" data-delay="0.2s">Seduh Cerita Kopimu.</h1>
@@ -56,41 +149,42 @@
                     <!-- Produk 1 -->
                     <article class="product-card animate-on-scroll fade-in-up" data-delay="0.1s">
                         <div class="card-image-wrapper">
-                            <img src="https://placehold.co/400x350/E1C16E/333333?text=Alat+Kopi+1" alt="Aeropress Go">
+                            <img src="./images/Aeropress.jpg" alt="Aeropress Go">
                         </div>
                         <div class="product-info">
                             <h3>Aeropress Go</h3>
                             <p class="price">Rp 550.000</p>
-                            <a href="#" class="btn btn-card">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="btn btn-card product-detail-link" data-product-id="aeropress-go">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </article>
                     <!-- Produk 2 -->
                     <article class="product-card animate-on-scroll fade-in-up" data-delay="0.2s">
                         <div class="card-image-wrapper">
-                            <img src="https://placehold.co/400x350/D2B48C/333333?text=Biji+Kopi" alt="Biji Kopi Gayo Wine">
+                            <img src="./images/gayo.jpg" alt="Biji Kopi Gayo Wine">
                         </div>
                         <div class="product-info">
                             <h3>Biji Kopi Gayo Wine</h3>
                             <p class="price">Rp 120.000 <span class="unit">/ 200g</span></p>
-                            <a href="#" class="btn btn-card">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="btn btn-card product-detail-link" data-product-id="gayo-wine">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </article>
                     <!-- Produk 3 -->
                     <article class="product-card animate-on-scroll fade-in-up" data-delay="0.3s">
                         <div class="card-image-wrapper">
-                           <img src="https://placehold.co/400x350/C0A080/333333?text=Grinder+Pro" alt="Hario Skerton Pro">
+                           <img src="./images/skerton.jpg" alt="Hario Skerton Pro">
                         </div>
                         <div class="product-info">
                             <h3>Hario Skerton Pro</h3>
                             <p class="price">Rp 850.000</p>
-                            <a href="#" class="btn btn-card">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="btn btn-card product-detail-link" data-product-id="hario-skerton">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- FEATURED ARTICLES -->
+        <!-- ... (rest of your sections: FEATURED ARTICLES, WHY AROMAPEDIA, TESTIMONIALS, NEWSLETTER SIGNUP) ... -->
+        <!-- FEATURED ARTICLES (no change needed for login functionality on this page) -->
         <section id="featured-articles" class="featured-articles-section section-padding bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll fade-in">
@@ -98,11 +192,8 @@
                     <p>Inspirasi dan pengetahuan seputar dunia kopi untuk Anda.</p>
                 </div>
                 <div class="article-grid">
-                    <!-- Artikel 1 -->
                     <article class="article-card animate-on-scroll fade-in-up" data-delay="0.1s">
-                        <div class="card-image-wrapper">
-                            <img src="https://placehold.co/400x280/A0522D/FFFFFF?text=Teknik+Seduh" alt="Teknik Dasar Manual Brew">
-                        </div>
+                        <div class="card-image-wrapper"><img src="./images/brew.jpg" alt="Teknik Dasar Manual Brew"></div>
                         <div class="article-info">
                             <span class="article-category">Teknik Seduh</span>
                             <h3>5 Teknik Dasar Manual Brew untuk Pemula</h3>
@@ -110,11 +201,8 @@
                             <a href="#" class="btn-link">Baca Selengkapnya <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                     </article>
-                    <!-- Artikel 2 -->
                     <article class="article-card animate-on-scroll fade-in-up" data-delay="0.2s">
-                         <div class="card-image-wrapper">
-                            <img src="https://placehold.co/400x280/8B4513/FFFFFF?text=Review+Biji" alt="Review Biji Kopi Flores">
-                        </div>
+                         <div class="card-image-wrapper"><img src="./images/biji.jpg" alt="Review Biji Kopi Flores"></div>
                         <div class="article-info">
                             <span class="article-category">Review Biji</span>
                             <h3>Review Jujur: Biji Kopi Single Origin Flores Bajawa</h3>
@@ -122,11 +210,8 @@
                             <a href="#" class="btn-link">Baca Selengkapnya <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                     </article>
-                     <!-- Artikel 3 -->
                     <article class="article-card animate-on-scroll fade-in-up" data-delay="0.3s">
-                        <div class="card-image-wrapper">
-                           <img src="https://placehold.co/400x280/8B5A2B/FFFFFF?text=Tips+Kopi" alt="Tips Memilih Grinder">
-                        </div>
+                        <div class="card-image-wrapper"><img src="./images/grinder.jpg" alt="Tips Memilih Grinder"></div>
                         <div class="article-info">
                              <span class="article-category">Tips & Trik</span>
                             <h3>Tips Memilih Grinder Kopi Sesuai Budget</h3>
@@ -138,12 +223,10 @@
             </div>
         </section>
 
-        <!-- WHY AROMAPEDIA -->
+        <!-- WHY AROMAPEDIA (no change needed) -->
         <section id="value-proposition" class="value-proposition-section section-padding">
             <div class="container">
-                <div class="section-header animate-on-scroll fade-in">
-                    <h2>Kenapa Memilih AromaPedia?</h2>
-                </div>
+                <div class="section-header animate-on-scroll fade-in"><h2>Kenapa Memilih AromaPedia?</h2></div>
                 <div class="value-items-grid">
                     <div class="value-item animate-on-scroll fade-in-up" data-delay="0.1s">
                         <div class="value-icon"><i class="fas fa-award"></i></div>
@@ -164,40 +247,23 @@
             </div>
         </section>
 
-        <!-- TESTIMONIALS -->
+        <!-- TESTIMONIALS (no change needed) -->
         <section id="testimonials" class="testimonials-section section-padding bg-light">
             <div class="container">
-                <div class="section-header animate-on-scroll fade-in">
-                    <h2>Apa Kata Mereka?</h2>
-                </div>
+                <div class="section-header animate-on-scroll fade-in"><h2>Apa Kata Mereka?</h2></div>
                 <div class="testimonial-carousel-wrapper animate-on-scroll fade-in-up">
                     <div class="testimonial-carousel">
                         <div class="testimonial-slide">
-                            <blockquote>
-                                "Produknya original dan pengirimannya cepat. Blognya juga sangat informatif buat pemula seperti saya! AromaPedia the best!"
-                            </blockquote>
-                            <div class="cite-wrapper">
-                                <img src="https://placehold.co/60x60/7F8C8D/FFFFFF?text=A" alt="Andi" class="cite-avatar">
-                                <cite>Andi, Jakarta</cite>
-                            </div>
+                            <blockquote>"Produknya original dan pengirimannya cepat. Blognya juga sangat informatif buat pemula seperti saya! AromaPedia the best!"</blockquote>
+                            <div class="cite-wrapper"><img src="https://placehold.co/60x60/7F8C8D/FFFFFF?text=A" alt="Andi" class="cite-avatar"><cite>Andi, Jakarta</cite></div>
                         </div>
                         <div class="testimonial-slide">
-                            <blockquote>
-                                "Akhirnya nemu toko online kopi yang lengkap! Dari alat sampai biji, semua ada. Plus, tipsnya berguna banget. Highly recommended!"
-                            </blockquote>
-                             <div class="cite-wrapper">
-                                <img src="https://placehold.co/60x60/2ECC71/FFFFFF?text=R" alt="Rina" class="cite-avatar">
-                                <cite>Rina, Bandung</cite>
-                            </div>
+                            <blockquote>"Akhirnya nemu toko online kopi yang lengkap! Dari alat sampai biji, semua ada. Plus, tipsnya berguna banget. Highly recommended!"</blockquote>
+                             <div class="cite-wrapper"><img src="https://placehold.co/60x60/2ECC71/FFFFFF?text=R" alt="Rina" class="cite-avatar"><cite>Rina, Bandung</cite></div>
                         </div>
                         <div class="testimonial-slide">
-                            <blockquote>
-                                "Suka banget sama konsep AromaPedia. Belanja sambil belajar. Barista rumahan jadi makin pede nih. Thanks AromaPedia!"
-                            </blockquote>
-                            <div class="cite-wrapper">
-                                <img src="https://placehold.co/60x60/3498DB/FFFFFF?text=B" alt="Bayu" class="cite-avatar">
-                                <cite>Bayu, Surabaya</cite>
-                            </div>
+                            <blockquote>"Suka banget sama konsep AromaPedia. Belanja sambil belajar. Barista rumahan jadi makin pede nih. Thanks AromaPedia!"</blockquote>
+                            <div class="cite-wrapper"><img src="https://placehold.co/60x60/3498DB/FFFFFF?text=B" alt="Bayu" class="cite-avatar"><cite>Bayu, Surabaya</cite></div>
                         </div>
                     </div>
                     <button class="carousel-btn prev-btn" aria-label="Previous Testimonial"><i class="fas fa-chevron-left"></i></button>
@@ -207,7 +273,7 @@
             </div>
         </section>
 
-        <!-- NEWSLETTER SIGNUP -->
+        <!-- NEWSLETTER SIGNUP (no change needed) -->
         <section id="newsletter" class="newsletter-section section-padding">
             <div class="container animate-on-scroll fade-in">
                 <h2>Jangan Ketinggalan Info!</h2>
@@ -218,9 +284,11 @@
                 </form>
             </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
+        <!-- ... (footer content remains the same) ... -->
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column footer-about">
@@ -258,6 +326,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeLoginModal">×</span>
+            <h2>Login Akun</h2>
+            <form id="loginForm">
+                <div id="loginErrorMessage" class="error-message" style="display:none;"></div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

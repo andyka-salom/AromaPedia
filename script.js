@@ -857,7 +857,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             if(confirm("Anda yakin ingin keluar dari panel admin?")){
                 alert("Anda telah keluar (simulasi).");
-                // window.location.href = "login.html"; // atau halaman utama
+                window.location.href = "../index.html"; // atau halaman utama
             }
         });
     }
@@ -1341,5 +1341,269 @@ document.addEventListener('DOMContentLoaded', function() {
             const resi = this.dataset.resi || this.textContent;
             alert(`Melacak pengiriman dengan resi: ${resi} (Simulasi)`);
         });
+    }
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Original scroll and menu toggle logic
+    const header = document.getElementById('main-header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links'); // Original nav-links for mobile toggle
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Animate on scroll
+    const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay || '0s';
+                entry.target.style.animationDelay = delay;
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target); // Optional: stop observing once animated
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animateOnScrollElements.forEach(el => {
+        observer.observe(el);
+    });
+
+    // Testimonial Carousel
+    const carousel = document.querySelector('.testimonial-carousel');
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dotsContainer = document.querySelector('.carousel-dots');
+
+    if (carousel && slides.length > 0) {
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        const dots = dotsContainer.querySelectorAll('.dot');
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto-play (optional)
+        // setInterval(nextSlide, 5000);
+
+        updateCarousel(); // Initialize
+    }
+
+
+    // Footer: Current Year
+    const currentYearSpan = document.getElementById('currentYear');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- NEW LOGIN/AUTH LOGIC ---
+    const loginModal = document.getElementById('loginModal');
+    const closeLoginModalBtn = document.getElementById('closeLoginModal');
+    const loginForm = document.getElementById('loginForm');
+    const navLinksContainer = document.getElementById('nav-links-container');
+    const loginErrorMessage = document.getElementById('loginErrorMessage');
+
+    // Dummy user credentials (in a real app, this comes from a backend)
+    const users = {
+        'admin@example.com': { password: '12345678', role: 'admin' },
+        'user@example.com': { password: '12345678', role: 'user' }
+    };
+
+    function showLoginModal() {
+        if (loginModal) loginModal.style.display = 'flex'; // Use flex for centering
+    }
+
+    function hideLoginModal() {
+        if (loginModal) {
+            loginModal.style.display = 'none';
+            loginErrorMessage.style.display = 'none'; // Hide error on close
+            loginForm.reset(); // Reset form fields
+        }
+    }
+function updateNavbar() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userRole = localStorage.getItem('userRole');
+    let navHTML = '';
+
+    // Ganti link Beranda tergantung status login
+    if (isLoggedIn && userRole === 'user') {
+        navHTML += `<li><a href="cust-dashboard.html">Beranda</a></li>`;
+    } else {
+        navHTML += `<li><a href="index.html">Beranda</a></li>`;
+    }
+
+    navHTML += `<li><a href="catalog.html">Produk</a></li>`;
+    navHTML += `<li><a href="blog.html">Blog</a></li>`;
+
+    if (isLoggedIn) {
+        if (userRole === 'user') {
+            navHTML += `<li><a href="catalog.html">Toko</a></li>`;
+            navHTML += `<li><a href="cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i></a></li>`;
+            navHTML += `<li><a href="account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>`;
+        }
+
+        navHTML += `<li><a href="#" id="logout-button">Logout</a></li>`;
+    } else {
+        navHTML += `<li><a href="#" id="login-nav-button">Login</a></li>`;
+    }
+
+    navLinksContainer.innerHTML = navHTML;
+
+    // Re-attach event listeners for dynamically added buttons
+    const loginNavButton = document.getElementById('login-nav-button');
+    if (loginNavButton) {
+        loginNavButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+    }
+
+    const logoutButton = document.getElementById('logout-button');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleLogout();
+        });
+    }
+}
+
+
+    function handleLogin(event) {
+        event.preventDefault();
+        const email = loginForm.email.value;
+        const password = loginForm.password.value;
+
+        const user = users[email];
+
+        if (user && user.password === password) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userRole', user.role);
+            localStorage.setItem('userEmail', email); // Optional: store email
+
+            hideLoginModal();
+            updateNavbar(); // Update navbar immediately
+
+            if (user.role === 'admin') {
+                window.location.href = './admin/admin-dashboard.html';
+            } else if (user.role === 'user') {
+                // If user logs in from landing page, redirect to their dashboard or catalog
+                window.location.href = 'cust-dashboard.html'; // Or catalog.html
+            }
+        } else {
+            loginErrorMessage.textContent = 'Email atau password salah.';
+            loginErrorMessage.style.display = 'block';
+        }
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userEmail');
+        updateNavbar();
+        // Optional: Redirect to homepage or login page
+        if (window.location.pathname.includes('/customer/') || window.location.pathname.includes('/admin/')) {
+             window.location.href = '../index.html'; // Go back to main landing page
+        }
+    }
+
+    // Event Listeners for Login/Logout
+    if (closeLoginModalBtn) {
+        closeLoginModalBtn.addEventListener('click', hideLoginModal);
+    }
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+
+    // Close modal if clicked outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === loginModal) {
+            hideLoginModal();
+        }
+    });
+
+    // Handle "Lihat Detail" product links
+    const productDetailLinks = document.querySelectorAll('.product-detail-link');
+    productDetailLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userRole = localStorage.getItem('userRole');
+            // const productId = link.dataset.productId; // If you need product ID later
+
+            if (isLoggedIn && userRole === 'user') {
+                // If user is logged in, redirect to catalog or specific product page
+                window.location.href = 'catalog.html'; // Or a specific product detail page
+            } else if (isLoggedIn && userRole === 'admin') {
+                // Admin might have different behavior, e.g., edit product. For now, same as user or just log.
+                console.log("Admin clicked product detail. Action TBD.");
+                 window.location.href = 'catalog.html'; // Or admin product view
+            }
+            else {
+                // If not logged in, show login modal
+                showLoginModal();
+            }
+        });
+    });
+
+
+    // Initial setup
+    updateNavbar();
+
+    // Auto-redirect admin if they land on index.html while logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userRole = localStorage.getItem('userRole');
+    if (isLoggedIn && userRole === 'admin' && window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+        // Don't auto-redirect if already on an admin page
+        // This check is a bit simplistic, for more complex routing use a proper router
+        if (!window.location.pathname.includes('/admin/')) {
+             // window.location.href = './admin/admin-dashboard.html'; // Can be disruptive, user might want to see homepage
+             console.log("Admin is logged in and on the homepage.");
+        }
     }
 });

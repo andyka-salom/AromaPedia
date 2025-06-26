@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pelanggan - AromaPedia</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link ke CSS utama -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Variabel warna dasar (sesuaikan dengan styles.css utama jika ada) */
+        :root {
+            --primary-color: #8B4513; /* Coklat Kopi Tua */
+            --secondary-color: #A0522D; /* Sienna */
+            --primary-color-light: #EADDCA; /* Beige muda */
+            --primary-color-dark: #5D2A0C; /* Coklat Kopi Sangat Tua */
+            --text-color: #333;
+            --light-bg: #f9f9f9; /* Background lebih terang untuk kontras */
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Shadow lebih halus */
+            --border-color: #e0e0e0;
+        }
+
+        /* Tambahan styling khusus dashboard jika diperlukan,
+           sebagian besar akan mengambil dari styles.css utama */
+
+        /* Breadcrumbs - jika ingin digunakan di dashboard */
+        .breadcrumbs-section {
+            background-color: #f8f9fa; /* Atau var(--light-bg) */
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color); /* var(--grey-light) jika ada */
+        }
+        .breadcrumbs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .breadcrumbs-list li {
+            margin-right: 8px;
+        }
+        .breadcrumbs-list li a {
+            color: var(--secondary-color); /* var(--text-light) jika ada */
+            text-decoration: none;
+        }
+        .breadcrumbs-list li a:hover {
+            color: var(--primary-color);
+        }
+        .breadcrumbs-list li:not(:last-child)::after {
+            content: '/';
+            margin-left: 8px;
+            color: #6c757d; /* var(--grey) jika ada */
+        }
+        .breadcrumbs-list li[aria-current="page"] {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .dashboard-content-layout {
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Sidebar Navigasi Dashboard */
+        .dashboard-sidebar {
+            flex: 0 0 280px; /* Lebar tetap untuk sidebar */
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            height: fit-content; /* Agar tingginya sesuai konten */
+        }
+        .dashboard-sidebar h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.5em;
+            color: var(--primary-color-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .dashboard-sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .dashboard-sidebar-nav li a {
+            display: flex; /* Ganti ke flex untuk ikon dan teks */
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+        .dashboard-sidebar-nav li a i {
+            margin-right: 12px;
+            width: 20px; /* Lebar tetap untuk ikon agar teks sejajar */
+            text-align: center;
+            color: var(--secondary-color);
+        }
+        .dashboard-sidebar-nav li a:hover,
+        .dashboard-sidebar-nav li a.active {
+            background-color: var(--primary-color-light);
+            color: var(--primary-color-dark);
+            font-weight: 600;
+        }
+        .dashboard-sidebar-nav li a.active i {
+            color: var(--primary-color-dark);
+        }
+
+
+        /* Konten Utama Dashboard */
+        .dashboard-main-content {
+            flex-grow: 1;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 40px; /* Padding lebih besar */
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.25); /* Shadow lebih menonjol */
+            display: flex;
+            align-items: center;
+        }
+        .welcome-banner .welcome-icon {
+            font-size: 3.5em;
+            margin-right: 25px;
+            opacity: 0.8;
+        }
+        .welcome-banner .welcome-text h1 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 2.2em;
+            font-family: 'Lora', serif;
+            font-weight: 600;
+        }
+        .welcome-banner .welcome-text p {
+            font-size: 1.1em;
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .dashboard-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        .dashboard-card .card-icon {
+            font-size: 2.8em; /* Sedikit lebih kecil dari banner */
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            line-height: 1;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dashboard-card h3 {
+            font-family: 'Lora', serif;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: var(--primary-color-dark);
+        }
+        .dashboard-card p {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .dashboard-card .btn-dashboard { /* Menggunakan .btn dari styles.css jika ada */
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px; /* Sesuaikan dengan .btn */
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .dashboard-card .btn-dashboard:hover {
+            background-color: var(--primary-color);
+        }
+        .dashboard-card .btn-dashboard i {
+            margin-left: 8px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .dashboard-content-layout {
+                flex-direction: column;
+            }
+            .dashboard-sidebar {
+                flex: 0 0 auto; /* Kembali ke auto agar tidak memaksakan lebar */
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .welcome-banner .welcome-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+                font-size: 3em;
+            }
+            .welcome-banner .welcome-text h1 {
+                font-size: 1.8em;
+            }
+             .dashboard-grid {
+                grid-template-columns: 1fr; /* Satu kolom di mobile */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <nav class="container">
+            <a href="../index.html" class="logo">AromaPedia</a> <!-- Link ke beranda utama -->
+            <ul class="nav-links" id="nav-links-container">
+                <!-- Dinamis diisi oleh script.js utama -->
+                <li><a href="../index.html#hero">Beranda</a></li>
+                <li><a href="../index.html#featured-products">Produk</a></li>
+                <li><a href="../index.html#featured-articles">Blog</a></li>
+                <li><a href="catalog.html">Toko</a></li>
+                <li><a href="cart.html" aria-label="Keranjang Belanja"><i class="fas fa-shopping-cart"></i> <span class="cart-count-badge" style="display:none;">0</span></a></li>
+                <li><a href="account-history.html" aria-label="Profil Pengguna"><i class="fas fa-user-circle"></i></a></li>
+                <li><a href="#" id="logout-button-header" class="btn btn-outline" style="margin-left:10px; padding: 8px 15px; display:none;">Logout</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- BREADCRUMBS (Opsional, tapi bagus untuk navigasi) -->
+        <nav class="breadcrumbs-section">
+            <div class="container">
+                <ol class="breadcrumbs-list">
+                    <li><a href="../index.html">Beranda</a></li>
+                    <li aria-current="page">Dashboard Saya</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- DASHBOARD MAIN SECTION -->
+        <section class="dashboard-main-section section-padding">
+            <div class="container">
+                <div class="dashboard-content-layout">
+                    <!-- SIDEBAR NAVIGATION -->
+                    <aside class="dashboard-sidebar">
+                        <h3>Navigasi Akun</h3>
+                        <nav class="dashboard-sidebar-nav">
+                            <ul>
+                                <li><a href="cust-dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                <li><a href="catalog.html"><i class="fas fa-store"></i> Jelajahi Toko</a></li>
+                                <li><a href="account-history.html#orders"><i class="fas fa-receipt"></i> Riwayat Pesanan</a></li>
+                                <li><a href="account-history.html#addresses"><i class="fas fa-map-marked-alt"></i> Alamat Saya</a></li>
+                                <li><a href="account-history.html#settings"><i class="fas fa-user-cog"></i> Pengaturan Akun</a></li>
+                                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Keranjang Saya</a></li>
+                                <li><a href="#" id="logout-button-sidebar"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <!-- MAIN DASHBOARD CONTENT -->
+                    <div class="dashboard-main-content">
+                        <section class="welcome-banner">
+                            <div class="welcome-icon"><i class="fas fa-mug-hot"></i></div>
+                            <div class="welcome-text">
+                                
+                                <p id="welcome-subheading">Kelola akun Anda dan temukan pengalaman kopi terbaik di AromaPedia.</p>
+                            </div>
+                        </section>
+
+                        <section class="dashboard-grid">
+                            <article class="dashboard-card">
+                                <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
+                                <h3>Katalog Produk</h3>
+                                <p>Jelajahi koleksi biji kopi, alat seduh, dan aksesoris terbaru kami.</p>
+                                <a href="catalog.html" class="btn-dashboard">Lihat Katalog <i class="fas fa-arrow-right"></i></a>
+                            </article>
+
+                            <article class="dashboard-card">
+                                <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                <h3>Pesanan Terbaru</h3>
+                                <p>Lihat status pesanan terakhir Anda atau lacak pengiriman.</p>
+                                <a href="account-history.html#orders" class="btn-dashboard">Cek Pesanan <i class="fas fa-arrow-right"></i></a>
+                            </article>
+
+                            <article class="dashboard-card">
+                                <div class="card-icon"><i class="fas fa-heart"></i></div>
+                                <h3>Wishlist Anda</h3>
+                                <p>Produk favorit yang Anda simpan. Jangan sampai kehabisan!</p>
+                                <a href="account-history.html#wishlist" class="btn-dashboard">Lihat Wishlist <i class="fas fa-arrow-right"></i></a>
+                                <!-- Anda perlu membuat bagian wishlist di account-history.html -->
+                            </article>
+
+                            <article class="dashboard-card">
+                                <div class="card-icon"><i class="fas fa-user-edit"></i></div>
+                                <h3>Profil Saya</h3>
+                                <p>Perbarui informasi pribadi dan preferensi akun Anda.</p>
+                                <a href="account-history.html#settings" class="btn-dashboard">Edit Profil <i class="fas fa-arrow-right"></i></a>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column footer-about">
+                    <h3 class="logo-footer">AromaPedia</h3>
+                    <p>Menemani setiap seduhan kopi Anda dengan produk berkualitas dan pengetahuan yang mencerahkan.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigasi Cepat</h4>
+                    <ul>
+                        <li><a href="../index.html#value-proposition">Tentang Kami</a></li> <!-- Arahkan ke section yang relevan jika ada -->
+                        <li><a href="../index.html#newsletter">Hubungi Kami</a></li> <!-- atau halaman kontak khusus -->
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="../index.html#featured-articles">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Cara Pemesanan</a></li>
+                        <li><a href="#">Lacak Pesanan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-social">
+                    <h4>Ikuti Kami</h4>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> AromaPedia. Dirancang dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk pecinta kopi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--
+        Penting: Script utama (script.js dari root folder) harus di-load
+        untuk menangani menu mobile, animasi, dan mungkin fungsi login/logout global.
+        Namun, script khusus untuk dashboard ini (jika ada yang sangat spesifik)
+        bisa ditambahkan di sini atau diintegrasikan ke script.js utama dengan
+        pengecekan halaman.
+    -->
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Auth check and personalization (sama seperti sebelumnya)
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userRole = localStorage.getItem('userRole');
+            const userEmail = localStorage.getItem('userEmail');
+
+            const logoutButtonHeader = document.getElementById('logout-button-header');
+            if (logoutButtonHeader) { // Menampilkan tombol logout di header jika login
+                if(isLoggedIn && userRole === 'user') {
+                    logoutButtonHeader.style.display = 'inline-block';
+                } else {
+                     logoutButtonHeader.style.display = 'none';
+                }
+            }
+
+            if (!isLoggedIn || userRole !== 'user') {
+                window.location.href = '../index.html?loginRequired=true';
+            } else {
+            }
+
+            // Fungsi Logout (handle jika ada dua tombol logout)
+            function handleLogout() {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                // Juga hapus data keranjang jika ada
+                localStorage.removeItem('cartItems');
+                window.location.href = '../index.html';
+            }
+
+            const logoutBtnSidebar = document.getElementById('logout-button-sidebar');
+            if (logoutBtnSidebar) {
+                logoutBtnSidebar.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    handleLogout();
+                });
+            }
+             // Event listener untuk tombol logout di header juga dihandle oleh script.js utama
+             // Jika tidak, tambahkan di sini:
+            if (logoutButtonHeader) {
+                 logoutButtonHeader.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    handleLogout();
+                });
+            }
+
+
+            // Highlight active link in sidebar (sederhana, berdasarkan URL)
+            const currentPath = window.location.pathname.split('/').pop(); // Ambil nama file
+            const sidebarLinks = document.querySelectorAll('.dashboard-sidebar-nav li a');
+            sidebarLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop().split('#')[0]; // Ambil nama file dari href, abaikan hash
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+                // Khusus untuk link dashboard, karena bisa saja currentPath adalah cust-dashboard.html
+                 if (link.getAttribute('href') === 'cust-dashboard.html' && currentPath === 'cust-dashboard.html') {
+                     link.classList.add('active');
+                 }
+            });
+
+
+            // Tahun saat ini di footer (biasanya sudah ada di script.js utama)
+            // Jika tidak, tambahkan:
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan && !currentYearSpan.textContent) { // Hanya isi jika belum diisi oleh script.js global
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Mobile menu toggle (biasanya sudah ada di script.js utama)
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (menuToggle && navLinks && !navLinks.classList.contains('event-attached')) { // Cek agar tidak double event
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuToggle.querySelector('i').classList.toggle('fa-bars');
+                    menuToggle.querySelector('i').classList.toggle('fa-times');
+                });
+                navLinks.classList.add('event-attached');
+            }
+        });
+    </script>
+
+</body>
+</html>
